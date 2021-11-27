@@ -15,10 +15,12 @@ public class BoundedArrayQueue implements QueueADT{
     }
 
     @Override
-    public void enqueue(Object element) {
-        if(element == null) throw new IllegalArgumentException("Null argument is not allowed!");
-        objectList.add(element);
-        if(objectList.size()>size) throw new IllegalStateException("The limit has been exceeded!");
+    public void enqueue(Object element) throws IllegalArgumentException, IllegalStateException{
+        if(element==null){
+            throw new IllegalArgumentException("Null is not allowed");
+        }else if(size < objectList.size()+1){
+            throw new IllegalStateException("Q is full");
+        }else objectList.add(element);
     }
 
     @Override
